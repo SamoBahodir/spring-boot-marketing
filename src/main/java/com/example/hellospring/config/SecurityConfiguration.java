@@ -24,9 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http)throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/api/hodim").hasRole("LOGIN")
-                .antMatchers("/api/hodim/*").hasAnyRole("LOGIN","USER")
-                .antMatchers("/api/hodim/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
