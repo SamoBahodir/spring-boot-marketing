@@ -2,9 +2,7 @@ package com.example.hellospring.hodim;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HodimService {

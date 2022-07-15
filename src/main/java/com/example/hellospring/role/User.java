@@ -20,8 +20,8 @@ public class User {
     private String email;
     @ManyToMany
     @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_name",referencedColumnName = "name")}
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_name", referencedColumnName = "name")}
     )
     private Set<Rol> roles = new HashSet<>();
 }
