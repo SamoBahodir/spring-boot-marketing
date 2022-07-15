@@ -3,11 +3,13 @@ package com.example.hellospring.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,15 +18,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfiguration(@Lazy  UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         log.trace("trace");
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder().encode("user123")).roles("USER")
-                .and()
-                .withUser("login").password(passwordEncoder().encode("login123")).roles("LOGIN");
+                .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//                .inMemoryAuthentication()
+//                .withUser("user").password(passwordEncoder().encode("user123")).roles("USER")
+//                .and()
+//                .withUser("login").password(passwordEncoder().encode("login123")).roles("LOGIN");
     }
 
     @Override
@@ -38,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/hodim").permitAll()
-                .antMatchers(HttpMethod.POST,"/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/register").permitAll()
                 .antMatchers("/api/hodim1/**").hasRole("LOGIN")
                 .antMatchers("/api/hodim1/*").hasAnyRole("USER", "LOGIN")
                 .antMatchers("/api/employee/all").permitAll()
