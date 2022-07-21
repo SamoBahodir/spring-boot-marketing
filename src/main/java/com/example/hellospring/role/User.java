@@ -1,5 +1,6 @@
 package com.example.hellospring.role;
 
+import com.example.hellospring.enurmation.Status;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -18,6 +19,11 @@ public class User {
     private String userName;
     private String password;
     private String email;
+    private String firstName;
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},

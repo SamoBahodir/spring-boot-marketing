@@ -24,3 +24,6 @@ logging:
     root: info
   file:
     name: .myLog/logging
+
+secret: ${SECRET:jwtemployee}
+validity: ${VALIDATION:864000000}
