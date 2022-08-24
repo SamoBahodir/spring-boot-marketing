@@ -24,14 +24,15 @@ public class UserTokenJwtController {
     private final UserRepo repo;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginVm loginVm) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginVm.getPassword(), loginVm.getUserName()));
-        User user = repo.findByLogin(loginVm.getUserName());
-        if (user == null)
+    public ResponseEntity<?> login(@RequestBody LoginVm loginVm) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginVm.getPassword(), loginVm.getUsername()));
+        User user = repo.findByUsernameAndPassword(loginVm.getPassword(), loginVm.getUsername());
+        if (user == null) {
             throw new UsernameNotFoundException("BU user mavjud emas");
-        String token = jwtTokenProvider.createToken(user.getUserName(), user.getRoles());
+        }
+        String token = jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
         Map<Object, Object> objectMap = new HashMap<>();
-        objectMap.put("userName", user.getUserName());
+        objectMap.put("userName", user.getUsername());
         objectMap.put("token", token);
         return ResponseEntity.ok(objectMap);
     }

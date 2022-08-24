@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Slf4j
@@ -44,22 +43,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
-                .headers()
-                .frameOptions()
-                .disable()
-                .and()
+                .cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/hodim").permitAll()
+                .antMatchers(HttpMethod.POST, "/v1/user/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/token/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/register").permitAll()
-                .antMatchers("/api/hodim1/**").hasRole("LOGIN")
-                .antMatchers("/api/hodim1/*").hasAnyRole("USER", "LOGIN")
-                .antMatchers("/api/employee/all").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+//                .antMatchers("/api/hodim1/**").hasRole("LOGIN")
+//                .antMatchers("/api/hodim1/*").hasAnyRole("USER", "LOGIN")
+//                .antMatchers("/api/employee/all").permitAll()
+                .anyRequest().authenticated();
+
     }
 
 

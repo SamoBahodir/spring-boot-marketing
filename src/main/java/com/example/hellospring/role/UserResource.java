@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/v1/user")
 @RequiredArgsConstructor
 public class UserResource {
 
@@ -20,7 +20,7 @@ public class UserResource {
         if (!checkPasswordLength(user.getPassword())) {
             return new ResponseEntity("parol uzunligi 4 dan kam", HttpStatus.BAD_REQUEST);
         }
-        if (userService.checkUserName(user.getUserName())) {
+        if (userService.checkUserName(user.getUsername())) {
             return new ResponseEntity<>("oldin royhatdan otgan", HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(userService.create(user));

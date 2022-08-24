@@ -1,9 +1,12 @@
 package com.example.hellospring.security;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class LoginVm {
-    private String userName;
+    private String username;
     private String password;
 }
