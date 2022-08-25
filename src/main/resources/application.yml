@@ -25,5 +25,6 @@ logging:
   file:
     name: .myLog/logging
 
-secret: ${SECRET:jwtemployee}
+jwt:
+  secret: ${SECRET:jwtemployee}
 validity: ${VALIDATION:864000000}
