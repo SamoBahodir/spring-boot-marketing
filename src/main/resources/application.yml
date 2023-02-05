@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/employee
+    url: jdbc:postgresql://localhost:5433/security
     username: postgres
     password: 1273
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -15,7 +15,7 @@ spring:
   application:
     name: tracinglogs
 server:
-  port: 8083
+  port: 8080
 logging:
   level:
     com:

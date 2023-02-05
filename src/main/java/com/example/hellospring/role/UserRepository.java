@@ -6,11 +6,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+//    User findByUsername(String username);
 
     @Query("select u from User u where u.username=:username")
-    User findByLogin(@Param("username") String username);
+    User getUserByUsername(@Param("username") String username);
 
-    boolean existsByUsername(String username);
+//    boolean existsByUsername(String username);
 }
