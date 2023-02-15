@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/employee
+    url: jdbc:postgresql://localhost:5433/jwt
     username: postgres
     password: 1273
   jpa:
@@ -15,16 +15,16 @@ spring:
   application:
     name: tracinglogs
 server:
-  port: 8083
+  port: 8080
 logging:
   level:
     com:
       example:
         hellospring: trace
     root: info
-  file:
-    name: .myLog/logging
 
-jwt:
-  secret: ${SECRET:jwtemployee}
-validity: ${VALIDATION:864000000}
+
+client_id: ${CLIENT_ID:mobile_admin}
+client_credential: ${CLIENT_CREDENTIAL:7her1aml32}
+check_authorization_url: ${AUTH_URL:http://localhost:8080/oauth/check_token}
+resources_id: ${RESOURCE_ID:ehealth}
