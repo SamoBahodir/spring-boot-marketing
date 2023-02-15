@@ -18,17 +18,17 @@ public class UserService {
     private final UserRepository userRepository;
 //    private final com.example.hellospring.UserMapper userMapper;
 
-    public UserEntity getById(Long id) {
+    public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new ApiException(ResponseStatus.USER_NOT_FOUND));
     }
 
-    public Page<UserEntity> getAll(PageableRequest pageable) {
+    public Page<User> getAll(PageableRequest pageable) {
         return userRepository.findAll(new SearchSpecification<>(pageable.getSearch()),
                 PageableRequestUtil.toPageable(pageable));
     }
 
-    public UserEntity create(UserPayload payload) {
-        UserEntity user = new UserEntity();
+    public User create(UserPayload payload) {
+        User user = new User();
         if (userRepository.existsByUserName(payload.getUserName())) {
             throw new ApiException(ResponseStatus.USER_ALREADY_EXIST);
         }
@@ -44,8 +44,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserEntity update(Long id, UserPayload payload) {
-        UserEntity user = getById(id);
+    public User update(Long id, UserPayload payload) {
+        User user = getById(id);
         if (userRepository.existsByUserNameAndIdNot(payload.getUserName(), id)) {
             throw new ApiException(ResponseStatus.USER_ALREADY_EXIST);
         }
@@ -65,13 +65,13 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        UserEntity userEntity = getById(id);
+        User userEntity = getById(id);
         userEntity.setStatus(Status.DELETED);
         userRepository.save(userEntity);
     }
 
-    public UserEntity updatePasswordUser(Long id, UserUpdatePassword userUpdatePassword) {
-        UserEntity userEntity = getById(id);
+    public User updatePasswordUser(Long id, UserUpdatePassword userUpdatePassword) {
+        User userEntity = getById(id);
         if (userUpdatePassword.getPassword().equals(userUpdatePassword.getRetryPassword()))
             throw new ApiException(ResponseStatus.PASSWORD_NOT_EQUALS);
         userEntity.setPassword(userUpdatePassword.getPassword());

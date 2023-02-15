@@ -31,7 +31,7 @@ public class UserSingleResponse extends TechnicalFieldsResponse {
 
     private PermissionResponse permissions;
 
-    public UserSingleResponse(UserEntity user) {
+    public UserSingleResponse(User user) {
         this.setPermissions(new PermissionResponse(Permission.USER_VIEW));
     }
 

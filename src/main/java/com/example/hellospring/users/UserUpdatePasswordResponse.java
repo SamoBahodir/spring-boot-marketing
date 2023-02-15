@@ -32,7 +32,7 @@ public class UserUpdatePasswordResponse extends TechnicalFieldsResponse {
     private PermissionResponse permission;
 
 
-    public UserUpdatePasswordResponse(UserEntity userEntity) {
+    public UserUpdatePasswordResponse(User userEntity) {
         this.id = userEntity.getId();
         this.userName = userEntity.getUserName();
         this.firstName = userEntity.getFirstName();

@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaGenericRepository<UserEntity> {
-    Optional<UserEntity> findByUserNameAndStatus(String username, Status status);
+public interface UserRepository extends JpaRepository<User, Long>, JpaGenericRepository<User> {
+    Optional<User> findByUserNameAndStatus(String username, Status status);
 
     boolean existsByUserName(String userName);
 
+    User findByUserName(String userName);
+
     boolean existsByUserNameAndIdNot(String userName, Long id);
+
 }

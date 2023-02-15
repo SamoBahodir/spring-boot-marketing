@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity extends TechnicalFields {
+public class User extends TechnicalFields {
     @Id
     @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")

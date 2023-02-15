@@ -1,7 +1,7 @@
 package com.example.hellospring.service;
 
-import com.example.hellospring.role.User;
-import com.example.hellospring.role.UserRepository;
+import com.example.hellospring.users.User;
+import com.example.hellospring.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getUserByUsername(username);
+        User user = userRepository.findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("Cloud not fount user");
 

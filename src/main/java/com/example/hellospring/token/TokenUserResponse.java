@@ -1,6 +1,6 @@
 package com.example.hellospring.token;
 
-import com.example.hellospring.users.UserEntity;
+import com.example.hellospring.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class TokenUserResponse {
 
     private String photo;
 
-    public TokenUserResponse(UserEntity user) {
+    public TokenUserResponse(User user) {
         this.id = user.getId();
         this.pin = user.getPin();
         this.first_name = user.getFirstName();

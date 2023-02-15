@@ -1,6 +1,6 @@
 package com.example.hellospring.token;
 
-import com.example.hellospring.users.UserEntity;
+import com.example.hellospring.users.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private final UserEntity user;
+    private final User user;
     private final Long userId;
     private final Collection<GrantedAuthority> permissions;
 
-    public UserDetailsImpl(UserEntity user, Collection<GrantedAuthority> permissions) {
+    public UserDetailsImpl(User user, Collection<GrantedAuthority> permissions) {
         this.user = user;
         this.userId = user.getId();
         this.permissions = permissions;
@@ -63,7 +63,7 @@ public class UserDetailsImpl implements UserDetails {
         return userId;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 

@@ -25,7 +25,7 @@ public class UserListResponse extends TechnicalFieldsResponse {
     private String password;
 
 
-    public UserListResponse(UserEntity userEntity) {
+    public UserListResponse(User userEntity) {
         this.id = userEntity.getId();
         this.pin = userEntity.getPin();
         this.fullName = userEntity.getFullName();

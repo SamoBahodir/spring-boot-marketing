@@ -2,7 +2,7 @@ package com.example.hellospring.token;
 
 import com.example.hellospring.cor.Status;
 import com.example.hellospring.roles.RoleService;
-import com.example.hellospring.users.UserEntity;
+import com.example.hellospring.users.User;
 import com.example.hellospring.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,12 +30,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> userCheck = userRepository.findByUserNameAndStatus(username, Status.ACTIVE);
+        Optional<User> userCheck = userRepository.findByUserNameAndStatus(username, Status.ACTIVE);
         if (userCheck.isEmpty()) {
             String msg = "User [" + username + "] not found.";
             throw new UsernameNotFoundException(msg);
         }
-        UserEntity user = userCheck.get();
+        User user = userCheck.get();
         Collection<GrantedAuthority> permissions = new ArrayList<>();
         if (user.getRoleId() != null)
             elasticRoleService.findOptionalById(user.getRoleId()).ifPresent(elasticRole -> elasticRole.getPermissions().forEach(permission -> permissions.add(new SimpleGrantedAuthority(permission.name()))));

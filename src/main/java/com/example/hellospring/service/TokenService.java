@@ -34,7 +34,7 @@ public class TokenService {
         headers.add("Authorization", "Basic " + new String(Base64.encodeBase64(credentials.getBytes())));
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        String access_token_url = "http://localhost:8080/oauth/token" +
+        String access_token_url = "http://localhost:8080/v1/oauth/token" +
                 "?username=" + username +
                 "&password=" + password +
                 "&grant_type=password";
