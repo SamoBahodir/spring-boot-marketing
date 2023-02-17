@@ -1,6 +1,6 @@
 package com.example.hellospring.cor.current_user;
 
-import com.example.hellospring.cor.exception.AccessDeniedException;
+import com.example.hellospring.cor.exception.ApiException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
@@ -24,8 +24,7 @@ public class CurrentUserService {
             return gson.fromJson(json, DecodedDetails.class);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new AccessDeniedException("Token not valid");
+            throw new ApiException("Token not valid");
         }
     }
-
 }

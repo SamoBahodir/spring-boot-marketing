@@ -2,6 +2,7 @@ package com.example.hellospring.config;
 
 import com.example.hellospring.token.CustomTokenEnhancer;
 import com.example.hellospring.token.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,18 +28,21 @@ import java.util.List;
 
 @Configuration
 @EnableAuthorizationServer
+@RequiredArgsConstructor
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final DataSource dataSource;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired(required = false)
-    public AuthorizationServerConfig(DataSource dataSource, UserDetailsServiceImpl userDetailsService, @Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager) {
-        this.dataSource = dataSource;
-        this.userDetailsService = userDetailsService;
-        this.authenticationManager = authenticationManager;
-    }
+//    @Autowired(required = false)
+//    public AuthorizationServerConfig(DataSource dataSource, UserDetailsServiceImpl userDetailsService, AuthenticationManager authenticationManager) {
+//        this.dataSource = dataSource;
+//        this.userDetailsService = userDetailsService;
+//        this.authenticationManager = authenticationManager;
+//    }
+
+
 
     @Bean
     public TokenStore tokenStore() {
